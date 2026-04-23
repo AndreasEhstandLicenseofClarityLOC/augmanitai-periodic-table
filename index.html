@@ -442,6 +442,106 @@ a{color:#00d2ff}
 @media (max-width: 720px) { .aug-welcome { padding: 22px 20px; } .aug-welcome h2 { font-size: 19px; } }
 @media print { .aug-welcome-bd { display: none !important; } }
 
+
+/* ===== MOBILE-HARDENING-v1-2026-04-23 START ===== */
+/* =========================================================
+   MOBILE-HARDENING v1 · 2026-04-23
+   Fixes: touch-target <44px, font <14px, iOS input zoom,
+   horizontal overflow, hover-only tooltips on touch.
+   Non-breaking: only activates at ≤520px or pointer:coarse.
+   ========================================================= */
+
+/* Prevent horizontal scroll on all phones */
+@media (max-width: 520px){
+  html, body { max-width: 100vw; overflow-x: hidden; }
+  body { font-size: 15px; line-height: 1.55; }
+
+  /* iOS Safari: input font ≥16px prevents auto-zoom */
+  input, select, textarea, button {
+    font-size: 16px !important;
+  }
+
+  /* Skip-link + focusables readable */
+  a.skip-link, .skip-link { font-size: 14px !important; min-height: 44px; padding: 10px 14px; }
+
+  /* Every interactive ≥44px tap-target */
+  a, button, [role="button"], input[type="button"], input[type="submit"],
+  .btn, .chip, .tag, .nav-link, .pill {
+    min-height: 44px;
+    line-height: 1.25;
+    padding-top: 10px; padding-bottom: 10px;
+  }
+
+  /* Cross-site nav header: stack, larger hit area */
+  nav, .aug-nav, header nav {
+    gap: 6px !important;
+    flex-wrap: wrap;
+  }
+  nav a, .aug-nav a, header nav a {
+    font-size: 13px !important;
+    min-height: 40px;
+    padding: 8px 12px !important;
+    white-space: nowrap;
+  }
+
+  /* Typographic base: tiny fonts lifted to floor */
+  p, li, td, th, .legal, .disclaimer, .meta, .muted, .small,
+  .term-phase, .phase-label, .cell-sub, .element-sub {
+    font-size: 13px !important;
+  }
+
+  /* Headings scaled */
+  h1 { font-size: 26px !important; line-height: 1.2; }
+  h2 { font-size: 21px !important; line-height: 1.25; }
+  h3 { font-size: 18px !important; line-height: 1.3; }
+  h4 { font-size: 16px !important; }
+
+  /* Cards/panels: full-width, snug margins */
+  .card, .panel, .legal-card, .aug-scope-clar,
+  .framing-defense, .excerpt-banner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 14px !important;
+  }
+
+  /* Keep search/filters usable */
+  input[type="text"], input[type="search"] {
+    min-height: 44px;
+    padding: 10px 12px !important;
+  }
+}
+
+/* Extra-narrow phones (iPhone SE 1st gen etc.) */
+@media (max-width: 360px){
+  body { font-size: 14px; }
+  h1 { font-size: 22px !important; }
+  h2 { font-size: 19px !important; }
+  nav a, .aug-nav a { font-size: 12px !important; padding: 6px 10px !important; }
+}
+
+/* Touch devices (phones + tablets): hover-only tooltips tappable */
+@media (pointer: coarse){
+  [title], [data-tooltip] { cursor: pointer; }
+  a, button, .btn, .chip { min-height: 44px; }
+}
+
+/* Landscape-phone: keep critical content above fold */
+@media (max-width: 820px) and (orientation: landscape) and (max-height: 500px){
+  .excerpt-banner, .framing-defense { padding: 10px !important; font-size: 12px !important; }
+}
+
+/* Reduced motion respected globally */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== MOBILE-HARDENING-v1-2026-04-23 END ===== */
 </style>
 </head>
 <body>
