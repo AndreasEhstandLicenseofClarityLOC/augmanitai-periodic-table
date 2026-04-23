@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://periodic.augmanitai.com/sitemap.xml
