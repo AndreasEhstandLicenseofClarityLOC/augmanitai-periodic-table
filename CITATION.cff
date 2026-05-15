@@ -10,7 +10,7 @@ identifiers:
   - type: doi
     value: "10.5281/zenodo.19317936"
     description: "Canonical AUGMANITAI DOI"
-repository-code: "https://github.com/<YOUR-GH-USER>/augmanitai-periodic-table"
+repository-code: "https://github.com/AndreasEhstandLicenseofClarityLOC/augmanitai-periodic-table"
 url: "https://periodic.augmanitai.com/"
 abstract: "Interactive periodic table of 100 core AUGMANITAI terms for human-AI interaction. Excerpt from the 1000-term compendium. CC BY-NC-ND 4.0."
 keywords:
