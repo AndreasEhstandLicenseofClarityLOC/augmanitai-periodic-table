@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -261,8 +261,26 @@ a{color:#00d2ff} /* === TOP BANNER (Age + Short-Disc) === */
 @media(max-width:480px){.aug-footer-strip{padding:12px 8px}.aug-footer-strip a{padding:5px 8px;font-size:9px;min-height:40px}}
 @media print{.aug-footer-strip{display:none !important}}
 </style>
-</head>
+<style id="periodic-premium-ux">
+/* Mouse Spotlight */
+.spotlight { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle 500px at var(--mx, 50%) var(--my, 50%), rgba(46,224,255,0.12), transparent 70%); transition: background 80ms; }
+@media (pointer: coarse), (prefers-reduced-motion: reduce) { .spotlight { display: none; } }
+/* Cosmic bg */
+.cosmos-pt { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 700px 900px at 12% 8%, rgba(46,224,255,0.05), transparent 50%), radial-gradient(ellipse 800px 1000px at 88% 92%, rgba(138,93,255,0.04), transparent 50%); }
+.cosmos-pt::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 18% 28%, rgba(255,255,255,0.4) 0.6px, transparent 1.4px), radial-gradient(circle at 62% 68%, rgba(255,255,255,0.3) 0.6px, transparent 1.4px), radial-gradient(circle at 82% 18%, rgba(255,255,255,0.25) 0.6px, transparent 1.4px); background-size: 600px 600px, 800px 800px, 700px 700px; opacity: 0.20; animation: ptdrift 140s linear infinite; }
+@keyframes ptdrift { from { transform: translate(0,0); } to { transform: translate(-180px,-120px); } }
+@media (prefers-reduced-motion: reduce) { .cosmos-pt::before { animation: none; } }
+@media (max-width: 700px) { .cosmos-pt { opacity: 0.5; } }
+/* html smooth scroll */
+html { scroll-behavior: smooth; }
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+/* focus-visible boost */
+:focus-visible { outline: 2px solid #2ee0ff; outline-offset: 3px; border-radius: 4px; }
+</style></head>
 <body>
+<div class="cosmos-pt" aria-hidden="true"></div><div class="spotlight" id="spotlight" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Zum Inhalt springen · Skip to content</a>
 <nav class="aug-sitenav" aria-label="AUGMANITAI Network"><div class="aug-sitenav-inner"><a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-portal/" class="ansn-home" aria-label="AUGMANITAI Portal">&#8592; AUGMANITAI</a><span class="ansn-sep" aria-hidden="true">//</span> <a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-portal/" class="ansn-link" rel="noopener">Portal</a> <a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-stage-0/" class="ansn-link" rel="noopener">Atlas<span class="ansn-mini"> 32k</span></a> <a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-wow/" class="ansn-link" rel="noopener">Knowledge Graph<span class="ansn-mini"> 104</span></a> <a href="#" class="ansn-current" aria-current="page">Periodic Table<span class="ansn-mini"> 100</span></a> <a href="https://andreasehstandlicenseofclarityloc.github.io/permanitai-framework/" class="ansn-link" rel="noopener">PERMANITAI</a> <a href="https://andreasehstandlicenseofclarityloc.github.io/neomanitai-terms/" class="ansn-link" rel="noopener">Terms<span class="ansn-mini"> 6k+</span></a> <a href="https://andreasehstandlicenseofclarityloc.github.io/andreas-ehstand-entity/" class="ansn-link" rel="noopener">Author</a></div></nav> <!-- AGE BANNER -->
 <div class="age-banner">Advanced academic content · Wissenschaftlicher Fachinhalt · Descriptive research framework</div> <!-- EXCERPT BANNER -->
@@ -611,5 +629,21 @@ window.addEventListener("hashchange",checkHash); function doSearch(q){ q=q.toLow
 document.addEventListener('DOMContentLoaded', function(){ var $wbd = document.getElementById('aug-welcome-bd'); var $wDismiss = document.getElementById('aug-welcome-dismiss'); var $wStart = document.getElementById('aug-welcome-start'); function closeWelcome(){ if (!$wbd) return; $wbd.classList.remove('active'); $wbd.setAttribute('aria-hidden', 'true'); try { localStorage.setItem('aug_s1_welco', '1'); } catch(err){} var q = document.getElementById('searchBox') || document.querySelector('input[type="search"]'); if (q) q.focus(); } function shouldShow(){ try { if (window.location.hash && window.location.hash.length > 1) return false; if ((new URLSearchParams(window.location.search)).get('welcome') === '0') return false; return localStorage.getItem('aug_s1_welco') !== '1'; } catch(err){ return false; } } if ($wbd && shouldShow()){ $wbd.classList.add('active'); $wbd.setAttribute('aria-hidden', 'false'); setTimeout(function(){ var box = $wbd.querySelector('.aug-welcome'); if (box) box.focus(); }, 30); } if ($wDismiss) $wDismiss.addEventListener('click', closeWelcome); if ($wStart) $wStart.addEventListener('click', closeWelcome); if ($wbd) $wbd.addEventListener('click', function(e){ if (e.target === $wbd) closeWelcome; }); document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && $wbd && $wbd.classList.contains('active')) closeWelcome(); if (e.key !== 'Tab' || !$wbd || !$wbd.classList.contains('active')) return; var focusables = $wbd.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])'); if (!focusables.length) return; var first = focusables[0], last = focusables[focusables.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } });
 });
 </script> <div class="aug-footer-strip"><span class="afs-label">AUGMANITAI Research Network</span><div class="afs-row"><a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-portal/" rel="noopener">&#8592; Portal</a><a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-stage-0/" rel="noopener">Atlas 32k+</a><a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-wow/" rel="noopener">Knowledge Graph</a><a href="https://andreasehstandlicenseofclarityloc.github.io/augmanitai-periodic-table/" rel="noopener">Periodic Table</a><a href="https://andreasehstandlicenseofclarityloc.github.io/permanitai-framework/" rel="noopener">PERMANITAI</a><a href="https://andreasehstandlicenseofclarityloc.github.io/neomanitai-terms/" rel="noopener">Terms 6k+</a><a href="https://andreasehstandlicenseofclarityloc.github.io/andreas-ehstand-entity/" rel="noopener">Author</a></div></div>
-</body>
+<script>
+/* Premium-UX: Mouse spotlight + reveal */
+(function(){
+  var sp = document.getElementById('spotlight');
+  if (sp && !matchMedia('(pointer: coarse)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var rafId;
+    document.addEventListener('mousemove', function(e){
+      if (rafId) return;
+      rafId = requestAnimationFrame(function(){ sp.style.setProperty('--mx',e.clientX+'px'); sp.style.setProperty('--my',e.clientY+'px'); rafId=null; });
+    }, { passive: true });
+  }
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  }
+})();
+</script></body>
 </html>
