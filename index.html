@@ -239,6 +239,22 @@ a{color:#00d2ff} /* === TOP BANNER (Age + Short-Disc) === */
 } /* Reduced motion respected globally */
 @media (prefers-reduced-motion: reduce){ *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 } /* ===== MOBILE-HARDENING-v1-2026-04-23 END ===== */
+
+/* touch-target-v1 */
+@media (pointer: coarse), (max-width: 800px) {
+  nav a, nav button, footer a, .links a, .footer-bottom a, .aug-sitenav-strip a,
+  .legal-nav a, .topnav a, .aug-sitenav a, .pn-bar a, header a,
+  a.link, a.brand, a.brand-link, a.logo, .corpus-card a, .branch-card a,
+  .domain-card a, .sister-card { min-height: 44px !important; display: inline-flex !important;
+    align-items: center !important; padding-top: 8px !important; padding-bottom: 8px !important; }
+  button { min-height: 44px !important; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px !important; }
+  h1 { font-size: clamp(1.6em, 6vw, 2.2em) !important; }
+  .container, main, section { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
 </style>
 <style id="aug-nav-v3">
 .aug-sitenav{background:#050508 !important;border-bottom:1px solid #1e293b !important;padding:0 !important;display:block !important}
